@@ -107,6 +107,51 @@ public class ProductDao {
 		}
 	}
 	
+	public static void deleteProduct(int pid)
+	{
+		try {
+			
+			Connection conn = EcomUtil.createConnection();
+			String sql = "delete from product where pid=?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, pid);
+			pst.executeUpdate();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static List<Product> getProductByCategory(String p_category)
+	{
+		List<Product> list = new ArrayList<Product>();
+		try {
+			Connection conn = EcomUtil.createConnection();
+			String sql = "select * from product where p_category=?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, p_category);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next())
+			{
+				Product p =new Product();
+				p.setPid(rs.getInt("pid"));
+				p.setUid(rs.getInt("uid"));
+				p.setP_category(rs.getString("p_category"));
+				p.setP_name(rs.getString("p_name"));
+				p.setP_model(rs.getString("p_model"));
+				p.setP_price(rs.getInt("p_price"));
+				p.setP_image(rs.getString("p_image"));
+				p.setP_desc(rs.getString("p_desc"));
+				list.add(p);			
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
 	
 	
 }

@@ -48,7 +48,8 @@
 									<div class="products-slick" data-nav="#slick-nav-1">
 										
 										<%
-											List<Product> list = ProductDao.getAllProduct();
+											String pc = request.getParameter("p_category");
+											List<Product> list = ProductDao.getProductByCategory(pc);;
 											for(Product p : list)
 											{
 										%>

@@ -141,7 +141,7 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="#">
+									<a href="mywishlist.jsp">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
 										<div class="qty">2</div>
@@ -229,13 +229,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.jsp">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<li class="active"><a href="index.jsp">Home</a></li>					
+						<li><a href="filter_product.jsp?p_category=laptop">Laptops</a></li>
+						<li><a href="filter_product.jsp?p_category=mobile">Smartphones</a></li>
+						<li><a href="filter_product.jsp?p_category=Camera">Cameras</a></li>
+						
 					</ul>
 					<!-- /NAV -->
 				</div>

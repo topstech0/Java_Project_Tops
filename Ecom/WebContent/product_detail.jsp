@@ -19,7 +19,9 @@
 
     </head>
 	<body>
-				
+		
+
+		
 
 		
 
@@ -34,7 +36,14 @@
 					<div class="col-md-12">
 						<div class="section-title">
 							<h3 class="title">New Products</h3>
-							
+							<div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
+									<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<!-- /section title -->
@@ -46,50 +55,92 @@
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
-										
-										<%
-											List<Product> list = ProductDao.getAllProduct();
-											for(Product p : list)
-											{
-										%>
 										<!-- product -->
-										<div class="product">
+										<%
+											int pid = Integer.parseInt(request.getParameter("pid"));
+											//System.out.println(pid);
+											Product p = ProductDao.getProductById(pid);
+										%>
+												<div class="product">
 											<div class="product-img">
-												<img src="Product_Images/<%=p.getP_image() %>" alt="" width="180px" height="210px">
+												<img src="Product_Images/<%=p.getP_image()%>" width="180px" height="210px">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category"><%=p.getP_category() %></p>
-												<h3 class="product-name"><%=p.getP_name() %></h3>
-												<h4 class="product-price">Rs. <%=p.getP_price() %></h4>
+												<p class="product-category"><b>Category : </b><%=p.getP_category() %></p>
+												<h3 class="product-name">Name : <%=p.getP_name() %></h3>
+												<h4 class="product-price">Price : Rs. <%=p.getP_price() %></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
+												
+												<p class="product-category"><b>Description : </b><%=p.getP_desc() %></p>
 												</div>
+												<br><br>
 												<div class="product-btns">
-													<a href="product_detail.jsp?pid=<%=p.getPid()%>">
-														<input type="button" name="action" value="Details" class="btn btn-primary">
-													</a>
+												
+												<%
+													if(session.getAttribute("u")!=null)
+													{
+												%>
+												<a href="add_to_wishlist.jsp?pid=<%=p.getPid()%>&uid=<%=u.getUid()%>">
+													<input type="button" value="Add To Wishlist" class="btn btn-primary">
+												</a>	
+												
+												<%
+													}
+													else
+													{
+												%>
+													
+												
+												<%	
+													}
+												%>
+												
+																																				
 												</div>
 											</div>
-											<!-- <div class="add-to-cart">
+											<div class="add-to-cart">
+											
+											<%
+												if(session.getAttribute("u")!=null)
+												{
+											%>
+												<a href="add_to_cart.jsp?pid=<%=p.getPid()%>&uid=<%=u.getUid()%>">
 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div> -->
+											</a>
+											
+											<%
+												}
+												else
+												{
+											%>
+												<a href="login.jsp">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Login</button>
+												</a>
+											
+											<%	
+												}
+											%>
+											
+											
+											</div> 
 										</div>
-										<!-- /product -->
+										<!-- /product -->	
 										
 										
-										<%	
-											}
 										
-										%>
+																
+
 										
+
 										
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
@@ -105,12 +156,13 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-<br><br>
+		<br><br>
 		
 
 		
 
 		
+
 		
 
 		<!-- FOOTER -->
